@@ -6,6 +6,10 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+/**
+ * @author six
+ *
+ */
 public class Client {
 
 	/**
@@ -25,7 +29,8 @@ public class Client {
 				out.writeBytes(sentence);
 				System.out.println("Message Sent");
 				String response = in.readLine();
-				System.out.println("Message received "+i+" : " + response);
+				System.out.println("Message received " + i + " : " + response);
+				String[] tab = response.split(" ");
 			}
 			as.close();
 		} catch (UnknownHostException e) {

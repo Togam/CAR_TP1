@@ -6,6 +6,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 
+/**
+ * @author six
+ *
+ */
 public class Server {
 
 	/**
