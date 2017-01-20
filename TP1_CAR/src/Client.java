@@ -29,7 +29,7 @@ public class Client {
 						System.in));
 
 				String sentence = line.readLine() + "\n";
-
+				
 				if (sentence.equals("end\n")) {
 					System.out.println("fin des operations");
 					out.writeBytes("end");
@@ -38,9 +38,15 @@ public class Client {
 				} else {
 					out.writeBytes(sentence);
 					System.out.println("Message Sent");
-
 					String response = in.readLine();
+					if (response != null){
+					
 					System.out.println("Message received : " + response);
+					} else {
+						System.out.println("division par 0 interdite");
+						as.close();
+						break;
+					}
 				}
 			}
 		} catch (UnknownHostException e) {
@@ -49,7 +55,7 @@ public class Client {
 		} catch (IOException e) {
 			System.out.println("IOException client" + e);
 			System.exit(-1);
-		}
+		} 
 	}
 
 }

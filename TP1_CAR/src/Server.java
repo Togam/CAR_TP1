@@ -16,6 +16,8 @@ public class Server {
 	 */
 	public static void main(String[] args) {
 		ServerSocket ps = null;
+		// La pile représente l'état, elle permet des opération sur le résultat
+		// de l'opération précédente.
 		int pile = 0;
 
 		try {
@@ -34,7 +36,6 @@ public class Server {
 					String[] tab = msg.split(" ");
 
 					if (tab.length == 3) {
-
 						Operateur operateur = new Operateur(tab[0]);
 						pile = operateur.calc(Integer.parseInt(tab[1]),
 								Integer.parseInt(tab[2]));
@@ -53,6 +54,9 @@ public class Server {
 			}
 		} catch (IOException e) {
 			System.out.println("IOException server" + e);
+			System.exit(-1);
+		} catch (ArithmeticException e) {
+			System.out.println("Division par zéro interdite !");
 			System.exit(-1);
 		}
 	}
