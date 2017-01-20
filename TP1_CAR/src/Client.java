@@ -44,7 +44,7 @@ public class Client {
 				}
 			}
 		} catch (UnknownHostException e) {
-			System.out.println("UnknownHostException client");
+			System.out.println("UnknownHostException client" + e);
 			System.exit(-1);
 		} catch (IOException e) {
 			System.out.println("IOException client" + e);

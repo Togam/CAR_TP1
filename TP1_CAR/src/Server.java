@@ -16,6 +16,8 @@ public class Server {
 	 */
 	public static void main(String[] args) {
 		ServerSocket ps = null;
+		int pile = 0;
+
 		try {
 			ps = new ServerSocket(4000);
 			Socket as = ps.accept();
@@ -30,10 +32,17 @@ public class Server {
 
 				if (!msg.equals("end")) {
 					String[] tab = msg.split(" ");
-					Operateur operateur = new Operateur(tab[0]);
-					int resultat = operateur.calc(Integer.parseInt(tab[1]),
-							Integer.parseInt(tab[2]));
-					String sentence = resultat + "\n";
+
+					if (tab.length == 3) {
+
+						Operateur operateur = new Operateur(tab[0]);
+						pile = operateur.calc(Integer.parseInt(tab[1]),
+								Integer.parseInt(tab[2]));
+					} else if (tab.length == 2) {
+						Operateur operateur = new Operateur(tab[0]);
+						pile = operateur.calc(pile, Integer.parseInt(tab[1]));
+					}
+					String sentence = pile + "\n";
 					out.writeBytes(sentence);
 				} else {
 					System.out.println("fin des operations");
