@@ -8,7 +8,7 @@ import java.net.UnknownHostException;
 
 /**
  * @author six
- *
+ * 
  */
 public class Client {
 
@@ -18,24 +18,25 @@ public class Client {
 	public static void main(String[] args) {
 		Socket as = null;
 		try {
-			for (int i = 0; i < 3; i++) {
-				as = new Socket(InetAddress.getLocalHost(), 4000);
-				System.out.println("Client : Connection established");
+			as = new Socket(InetAddress.getLocalHost(), 4000);
+			System.out.println("Client : Connection established");
+			while (true) {
 				DataOutputStream out = new DataOutputStream(
 						as.getOutputStream());
 				BufferedReader in = new BufferedReader(new InputStreamReader(
 						as.getInputStream()));
-				String sentence = "Vive la France !\n";
+				String sentence = "+ 1 2\n";
 				out.writeBytes(sentence);
 				System.out.println("Message Sent");
 				String response = in.readLine();
-				System.out.println("Message received " + i + " : " + response);
-				String[] tab = response.split(" ");
+				System.out.println("Message received : " + response);
+				as.close();
 			}
-			as.close();
 		} catch (UnknownHostException e) {
+			System.out.println("UnknownHostException");
 			System.exit(-1);
 		} catch (IOException e) {
+			System.out.println("IOException");
 			System.exit(-1);
 		}
 	}

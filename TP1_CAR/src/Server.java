@@ -26,11 +26,15 @@ public class Server {
 				DataOutputStream out = new DataOutputStream(as.getOutputStream());
 				String msg = in.readLine();
 				System.out.println("Message received : "+msg);
-				String resp = msg.toUpperCase()+"\n";
-				out.writeBytes(resp);
+				String[] tab = msg.split(" ");
+				Operateur operateur = new Operateur(tab[0]);
+				int resultat = operateur.calc(Integer.parseInt(tab[1]), Integer.parseInt(tab[2]));
+				String sentence = resultat+"\n";
+				out.writeBytes(sentence);
 				System.out.println("Réponse has been sent");
 			}
 		} catch (IOException e){
+			System.out.println("IOException server");
 			System.exit(-1);
 		}
 	}
