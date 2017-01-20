@@ -25,18 +25,29 @@ public class Client {
 						as.getOutputStream());
 				BufferedReader in = new BufferedReader(new InputStreamReader(
 						as.getInputStream()));
-				String sentence = "+ 1 2\n";
-				out.writeBytes(sentence);
-				System.out.println("Message Sent");
-				String response = in.readLine();
-				System.out.println("Message received : " + response);
-				as.close();
+				BufferedReader line = new BufferedReader(new InputStreamReader(
+						System.in));
+
+				String sentence = line.readLine() + "\n";
+
+				if (sentence.equals("end\n")) {
+					System.out.println("fin des operations");
+					out.writeBytes("end");
+					as.close();
+					break;
+				} else {
+					out.writeBytes(sentence);
+					System.out.println("Message Sent");
+
+					String response = in.readLine();
+					System.out.println("Message received : " + response);
+				}
 			}
 		} catch (UnknownHostException e) {
-			System.out.println("UnknownHostException");
+			System.out.println("UnknownHostException client");
 			System.exit(-1);
 		} catch (IOException e) {
-			System.out.println("IOException");
+			System.out.println("IOException client" + e);
 			System.exit(-1);
 		}
 	}
